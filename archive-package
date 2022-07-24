@@ -1,0 +1,73 @@
+#!/usr/bin/env fish
+
+for repo in $argv
+	# disconnect from origin temporarily
+	# set -l origin (git remote get-url origin)
+	# git remote rm origin
+
+	set -l repo_url "https://github.com/"$repo".git"
+	set -l current_branch (git branch --show-current)
+
+	# set $branches
+	set -l branches_unprocessed (git ls-remote --heads $repo_url)
+	set -l branches
+	for branch in $branches_unprocessed
+		# set -l branch (string split \trefs/heads/ $branch)[2]
+		set -l branch (string split \trefs/heads/ $branch)
+		set -l branch (string join \t $branch[1] $branch[2] $repo/$branch[2])
+		set -a branches $branch
+	end
+	set -S branches
+
+	# set $tags
+	# that regex tho
+	set -l tags_unprocessed (git ls-remote --tags $repo_url | grep '[^^][^{][^}]$')
+	set -l tags
+	for tag in $tags_unprocessed
+		set -l tag (string split \trefs/tags/ $tag)
+		set -l tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
+		set -a tags $tag
+	end
+	set -S tags
+
+	# set remote
+	if git remote get-url $repo &> /dev/null
+		git remote rm $repo
+	end
+	git remote add $repo $repo_url
+
+	# fetch the remote
+	git fetch $repo --no-tags
+
+	# push branches
+	for branch in $branches
+		set -l branch (string split \t $branch)
+
+		set -l commit $branch[1]
+		set -l original_branch $branch[2]
+		set -l new_branch $branch[3]
+
+		# new_branch format is the same as remote/branch so we can be a lil cheeky here
+		git checkout -b $original_branch --track $new_branch --no-guess
+
+		git branch $original_branch --set-upstream-to origin/$new_branch
+		git push origin $new_branch
+	end
+
+	# push tags
+	for tag in $tags
+		set -l tag (string split \t $tag)
+
+		set -l commit $tag[1]
+		set -l original_tag $tag[2]
+		set -l new_tag $tag[3]
+
+		git checkout $commit
+		git tag $new_tag
+	end
+	git push origin --tags
+
+	# reset
+	git remote rm $repo
+	git checkout $current_branch
+end
