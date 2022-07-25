@@ -24,6 +24,7 @@ for repo in $argv
 	set -e tags_unprocessed
 
 	for tag in $tags_unprocessed_raw
+		echo $tag TAAG
 		set -l tag (string split \trefs/tags/ $tag)
 		set -l tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
 
