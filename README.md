@@ -27,3 +27,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/incompatible-packages](https://github.com/atom/incompatible-packages.git)
 - [atom/language-rust](https://github.com/atom/language-rust.git)
 - [atom/line-ending-selector](https://github.com/atom/line-ending-selector.git)
+- [atom/link](https://github.com/atom/link.git)
