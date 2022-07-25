@@ -13,19 +13,30 @@ for repo in $argv
 		set -l branch (string join \t $branch[1] $branch[2] $repo/$branch[2])
 		set -a branches $branch
 	end
-	set -S branches
 
 
 	# set $tags
 	# that regex tho (please help improve it)
-	set -l tags_unprocessed (git ls-remote --tags $repo_url | grep '[^^][^{][^}]$')
-	set -l tags
-	for tag in $tags_unprocessed
+	set -l tags_unprocessed (git ls-remote --tags $repo_url)
+	# helpme with the `string join`s
+	set -l tags_unprocessed_raw (string join \n $tags | grep '[^^][^{][^}]$')
+	set -l tags_unprocessed_dereferenced (string join \n $tags | fgrep "^{}" | string sub -s 1 -e (math (string length $tag[2]) -3) $tag[2])
+	set -e tags_unprocessed
+
+	for tag in $tags_unprocessed_raw
 		set -l tag (string split \trefs/tags/ $tag)
 		set -l tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
+
+		# try to find a dereferenced version
+		set -l tag_dereferenced (string join \n $tags_unprocessed_dereferenced | grep \t$tag[2])
+		if test -n $tag_dereferenced
+			# it exists!
+			set tag (string split \trefs/tags $tag)
+			set tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
+		end
+
 		set -a tags $tag
 	end
-	set -S tags
 
 
 	# set and fetch remote
