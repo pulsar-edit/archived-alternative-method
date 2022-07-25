@@ -9,5 +9,3 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 
 ## Included repositories
 
-- [atom/about](https://github.com/atom/about)
-- [atom/atom-dark-syntax](https://github.com/atom/atom-dark-syntax.git)
