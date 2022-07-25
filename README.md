@@ -22,3 +22,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/dev-live-reload](https://github.com/atom/dev-live-reload.git)
 - [atom/exception-reporting](https://github.com/atom/exception-reporting.git)
 - [atom/git-diff](https://github.com/atom/git-diff.git)
+- [atom/go-to-line](https://github.com/atom/go-to-line.git)
