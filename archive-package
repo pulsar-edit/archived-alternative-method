@@ -111,4 +111,6 @@ for repo in $argv
 
 	# add a thing to the readme
 	echo "- ["$repo"]("$repo_url")" >> README.md
+	git add -A
+	git commit -m "add $repo"
 end
