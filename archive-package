@@ -79,4 +79,8 @@ for repo in $argv
 		set -l local_tag (string split \t $tag)[3]
 		git tag --delete $local_tag
 	end
+
+
+	# add a thing to the readme
+	echo "- ["$repo"]("$repo_url")" >> README.md
 end
