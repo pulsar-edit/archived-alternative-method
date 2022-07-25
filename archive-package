@@ -22,13 +22,14 @@ for repo in $argv
 	set -l tags_unprocessed_raw (string join \n $tags_unprocessed | grep '[^^][^{][^}]$')
 	# helpme with the `string join`s
 	set -l tags_unprocessed_dereferenced (string join \n $tags_unprocessed | fgrep "^{}" | string sub -s 1 -e (math (string length $tag[2]) -3) $tag[2])
+	set -l tags
 
 	for tag in $tags_unprocessed_raw
 		set -l tag (string split \trefs/tags/ $tag)
 
 		# try to find a dereferenced version
 		set -l tag_dereferenced (string join \n $tags_unprocessed_dereferenced | fgrep $tag[2])
-		if test -n $tag_dereferenced
+		if test -n "$tag_dereferenced"
 			# it exists!
 			set -l tag (string split \trefs/tags/ $tag_dereferenced)
 			set -a tags (string join \t $tag[1] $tag[2] $repo/$tag[2])
