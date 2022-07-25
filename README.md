@@ -17,3 +17,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/autoflow](https://github.com/atom/autoflow.git)
 - [atom/base16-tomorrow-dark-theme](https://github.com/atom/base16-tomorrow-dark-theme.git)
 - [atom/base16-tomorrow-light-theme](https://github.com/atom/base16-tomorrow-light-theme.git)
+- [atom/dalek](https://github.com/atom/dalek.git)
