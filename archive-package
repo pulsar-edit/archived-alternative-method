@@ -58,20 +58,32 @@ for repo in $argv
 
 
 	# push tags
-	# for tag in $tags
-	# 	set -l tag (string split \t $tag)
+	for tag in $tags
+		set -l tag (string split \t $tag)
 
-	# 	set -l commit $tag[1]
-	# 	set -l original_tag $tag[2]
-	# 	set -l new_tag $tag[3]
+		set -l commit $tag[1]
+		set -l original_tag $tag[2]
+		set -l new_tag $tag[3]
 
-	# 	git checkout $commit
-	# 	git tag $new_tag
-	# end
-	# git push origin --tags
+		git checkout $commit
+		git tag $new_tag
+	end
+	git push origin --tags
 
 
 	# reset
 	git remote rm $repo
 	git checkout $current_branch
+
+	# reset branches
+	for branch in $branches
+		set -l local_branch (string split \t $branch)[3]
+		git branch -D $local_branch
+	end
+
+	# reset tags
+	for tag in $tags
+		set -l local_tag (string split \t $tag)[3]
+		git tag --delete $tag
+	end
 end
