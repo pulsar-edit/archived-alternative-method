@@ -23,3 +23,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/exception-reporting](https://github.com/atom/exception-reporting.git)
 - [atom/git-diff](https://github.com/atom/git-diff.git)
 - [atom/go-to-line](https://github.com/atom/go-to-line.git)
+- [atom/grammar-selector](https://github.com/atom/grammar-selector.git)
