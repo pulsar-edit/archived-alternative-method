@@ -11,3 +11,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 
 - [atom/about](https://github.com/atom/about.git)
 - [atom/atom-dark-syntax](https://github.com/atom/atom-dark-syntax.git)
+- [atom/atom-dark-ui](https://github.com/atom/atom-dark-ui.git)
