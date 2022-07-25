@@ -9,3 +9,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 
 ## Included repositories
 
+- [atom/about](https://github.com/atom/about.git)
