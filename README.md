@@ -34,3 +34,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/one-light-ui](https://github.com/atom/one-light-ui.git)
 - [atom/solarized-dark-syntax](https://github.com/atom/solarized-dark-syntax.git)
 - [atom/solarized-light-syntax](https://github.com/atom/solarized-light-syntax.git)
+- [atom/update-package-dependencies](https://github.com/atom/update-package-dependencies.git)
