@@ -35,3 +35,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/solarized-dark-syntax](https://github.com/atom/solarized-dark-syntax.git)
 - [atom/solarized-light-syntax](https://github.com/atom/solarized-light-syntax.git)
 - [atom/update-package-dependencies](https://github.com/atom/update-package-dependencies.git)
+- [atom/welcome](https://github.com/atom/welcome.git)
