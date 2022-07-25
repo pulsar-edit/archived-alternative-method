@@ -18,10 +18,14 @@ for repo in $argv
 	# set $tags
 	# that regex tho (please help improve it)
 	set -l tags_unprocessed (git ls-remote --tags $repo_url)
+	set -S tags_unprocessed
 	# helpme with the `string join`s
 	set -l tags_unprocessed_raw (string join \n $tags | grep '[^^][^{][^}]$')
+	set -S tags_unprocessed_raw
 	set -l tags_unprocessed_dereferenced (string join \n $tags | fgrep "^{}" | string sub -s 1 -e (math (string length $tag[2]) -3) $tag[2])
+	set -S tags_unprocessed_dereferenced
 	set -e tags_unprocessed
+	set -S tags_unprocessed
 
 	for tag in $tags_unprocessed_raw
 		echo $tag TAAG
