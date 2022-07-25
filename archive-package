@@ -8,6 +8,7 @@ for repo in $argv
 	set -l repo_url "https://github.com/"$repo".git"
 	set -l current_branch (git branch --show-current)
 
+
 	# set $branches
 	set -l branches_unprocessed (git ls-remote --heads $repo_url)
 	set -l branches
@@ -19,25 +20,26 @@ for repo in $argv
 	end
 	set -S branches
 
-	# set $tags
-	# that regex tho
-	set -l tags_unprocessed (git ls-remote --tags $repo_url | grep '[^^][^{][^}]$')
-	set -l tags
-	for tag in $tags_unprocessed
-		set -l tag (string split \trefs/tags/ $tag)
-		set -l tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
-		set -a tags $tag
-	end
-	set -S tags
 
-	# set remote
+	# # set $tags
+	# # that regex tho
+	# set -l tags_unprocessed (git ls-remote --tags $repo_url | grep '[^^][^{][^}]$')
+	# set -l tags
+	# for tag in $tags_unprocessed
+	# 	set -l tag (string split \trefs/tags/ $tag)
+	# 	set -l tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
+	# 	set -a tags $tag
+	# end
+	# set -S tags
+
+
+	# set and fetch remote
 	if git remote get-url $repo &> /dev/null
 		git remote rm $repo
 	end
 	git remote add $repo $repo_url
-
-	# fetch the remote
 	git fetch $repo --no-tags
+
 
 	# push branches
 	for branch in $branches
@@ -48,24 +50,26 @@ for repo in $argv
 		set -l new_branch $branch[3]
 
 		# new_branch format is the same as remote/branch so we can be a lil cheeky here
-		git checkout -b $original_branch --track $new_branch --no-guess
+		git checkout -b $new_branch --track $new_branch --no-guess
 
-		git branch $original_branch --set-upstream-to origin/$new_branch
-		git push origin $new_branch
+		# git branch $original_branch --set-upstream-to origin/$new_branch
+		git push -u origin $new_branch
 	end
+
 
 	# push tags
-	for tag in $tags
-		set -l tag (string split \t $tag)
+	# for tag in $tags
+	# 	set -l tag (string split \t $tag)
 
-		set -l commit $tag[1]
-		set -l original_tag $tag[2]
-		set -l new_tag $tag[3]
+	# 	set -l commit $tag[1]
+	# 	set -l original_tag $tag[2]
+	# 	set -l new_tag $tag[3]
 
-		git checkout $commit
-		git tag $new_tag
-	end
-	git push origin --tags
+	# 	git checkout $commit
+	# 	git tag $new_tag
+	# end
+	# git push origin --tags
+
 
 	# reset
 	git remote rm $repo
