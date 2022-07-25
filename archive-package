@@ -9,7 +9,6 @@ for repo in $argv
 	set -l branches_unprocessed (git ls-remote --heads $repo_url)
 	set -l branches
 	for branch in $branches_unprocessed
-		# set -l branch (string split \trefs/heads/ $branch)[2]
 		set -l branch (string split \trefs/heads/ $branch)
 		set -l branch (string join \t $branch[1] $branch[2] $repo/$branch[2])
 		set -a branches $branch
@@ -17,8 +16,8 @@ for repo in $argv
 	set -S branches
 
 
-	# # set $tags
-	# that regex tho
+	# set $tags
+	# that regex tho (please help improve it)
 	set -l tags_unprocessed (git ls-remote --tags $repo_url | grep '[^^][^{][^}]$')
 	set -l tags
 	for tag in $tags_unprocessed
@@ -46,7 +45,7 @@ for repo in $argv
 		set -l new_branch $branch[3]
 
 		# new_branch format is the same as remote/branch so we can be a lil cheeky here
-		git checkout -b $new_branch --track $new_branch --no-guess
+		git checkout -b $new_branch --track refs/remotes/$new_branch --no-guess
 		git push -u origin $new_branch
 	end
 
@@ -78,6 +77,6 @@ for repo in $argv
 	# reset tags
 	for tag in $tags
 		set -l local_tag (string split \t $tag)[3]
-		git tag --delete $tag
+		git tag --delete $local_tag
 	end
 end
