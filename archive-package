@@ -20,26 +20,24 @@ for repo in $argv
 	set -l tags_unprocessed (git ls-remote --tags $repo_url)
 	set -S tags_unprocessed
 	# helpme with the `string join`s
-	set -l tags_unprocessed_raw (string join \n $tags | grep '[^^][^{][^}]$')
+	set -l tags_unprocessed_raw (string join \n $tags_unprocessed | grep '[^^][^{][^}]$')
 	set -S tags_unprocessed_raw
-	set -l tags_unprocessed_dereferenced (string join \n $tags | fgrep "^{}" | string sub -s 1 -e (math (string length $tag[2]) -3) $tag[2])
+	set -l tags_unprocessed_dereferenced (string join \n $tags_unprocessed | fgrep "^{}" | string sub -s 1 -e (math (string length $tag[2]) -3) $tag[2])
 	set -S tags_unprocessed_dereferenced
 	set -e tags_unprocessed
 	set -S tags_unprocessed
 
 	for tag in $tags_unprocessed_raw
-		echo $tag TAAG
 		set -l tag (string split \trefs/tags/ $tag)
-		set -l tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
 
 		# try to find a dereferenced version
-		set -l tag_dereferenced (string join \n $tags_unprocessed_dereferenced | grep \t$tag[2])
+		set -l tag_dereferenced (string join \n $tags_unprocessed_dereferenced | fgrep \t$tag[2])
 		if test -n $tag_dereferenced
 			# it exists!
 			set tag (string split \trefs/tags $tag)
-			set tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
 		end
 
+		set tag (string join \t $tag[1] $tag[2] $repo/$tag[2])
 		set -a tags $tag
 	end
 
