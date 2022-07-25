@@ -1,5 +1,18 @@
 #!/usr/bin/env fish
 
+# crash on dirty working dir
+if not git diff --exit-code &> /dev/null
+	echo "Your working directory is not clean, please make sure there are not any uncommitted changes"
+	echo "before running this script again."
+	echo
+	echo "NOTE: This script will switch to all branches of the repo you intend to merge. If there are"
+	echo "gitignore'd files that are not in the global gitignore or `.git/info/exclude`, they more"
+	echo "than likely *will* make the working directory dirty and create conflicts, and that is undefined"
+	echo "behaviour. Unless they are indeed ignored through your global gitignore or `.git/info/exclude`,"
+	echo "please remove them to continue. If you are not sure, best to remove them to avoid problems."
+	return
+end
+
 for repo in $argv
 	set -l repo_url "https://github.com/"$repo".git"
 	set -l current_branch (git branch --show-current)
