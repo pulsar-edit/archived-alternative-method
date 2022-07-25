@@ -20,3 +20,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/dalek](https://github.com/atom/dalek.git)
 - [atom/deprecation-cop](https://github.com/atom/deprecation-cop.git)
 - [atom/dev-live-reload](https://github.com/atom/dev-live-reload.git)
+- [atom/exception-reporting](https://github.com/atom/exception-reporting.git)
