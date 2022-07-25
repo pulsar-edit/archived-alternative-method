@@ -92,6 +92,10 @@ for repo in $argv
 	end
 
 
+	# run a git fetch to update repo
+	git fetch origin
+
+
 	# add a thing to the readme
 	echo "- ["$repo"]("$repo_url")" >> README.md
 end
