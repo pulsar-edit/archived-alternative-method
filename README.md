@@ -21,3 +21,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/deprecation-cop](https://github.com/atom/deprecation-cop.git)
 - [atom/dev-live-reload](https://github.com/atom/dev-live-reload.git)
 - [atom/exception-reporting](https://github.com/atom/exception-reporting.git)
+- [atom/git-diff](https://github.com/atom/git-diff.git)
