@@ -29,3 +29,4 @@ Archived repositories from [Atom](https://github.com/atom) and [Pulsar](https://
 - [atom/line-ending-selector](https://github.com/atom/line-ending-selector.git)
 - [atom/link](https://github.com/atom/link.git)
 - [atom/one-dark-syntax](https://github.com/atom/one-dark-syntax.git)
+- [atom/one-dark-ui](https://github.com/atom/one-dark-ui.git)
